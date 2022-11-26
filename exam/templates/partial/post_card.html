@@ -9,6 +9,11 @@
             </div>
         </div>
     </a>
+      {% if request.user not in picture.user_favorite.all %}
+        <span  class="btn btn-success mt-3 add_to_favorite" data-picture-id="{{ picture.pk }}">Добавить в избранное</span>
+      {% else %}
+        <span class="btn btn-danger mt-3 add_to_favorite" data-picture-id="{{ picture.pk }}">Удалить с избранного</span>
+      {% endif %}
   </div>
   <div class="card-body">
     <a href="{% url 'picture_detail' picture.pk %}">

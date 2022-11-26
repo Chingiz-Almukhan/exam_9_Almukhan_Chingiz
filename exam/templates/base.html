@@ -15,6 +15,7 @@
 
 </head>
 <body>
+{% csrf_token %}
 {% load django_bootstrap5 %}
 
 
@@ -25,9 +26,39 @@
     {% endblock %}
 </div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    $('.add_to_favorite').click(function (e) {
+        e.preventDefault();
+        console.log($(this).text())
+        const pictureId = $(this).data('picture-id')
+        $.ajax({
+            url: `/api/add_to_favorite/${pictureId}`,
+            type: "POST",
+            data: {
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+            success: function (data) {
+                if (data.result === 'added') {
+                    console.log('hello')
+                    $(this).html('Удалить из избранного')
+                    $(this).css("background-color","blue")
+                } else {
+                    console.log('deleted')
+                    $(this).html('Добавить в избранное')
+                    $(this).css("background-color","yellow")
+                }
+
+            },
+            error: function (data) {
+                console.log('error')
+            }
+        });
+    })
+
+
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>

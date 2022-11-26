@@ -25,7 +25,7 @@
         {% csrf_token %}
         <button type="submit" class="btn btn-danger mt-3">Удалить</button>
         <a href="{% url 'edit_picture' picture.pk %}" class="btn btn-warning mt-3">Редактировать</a>
-        <span  class="btn btn-success mt-3">Добавить в избранное</span>
+        <span id="add_to_favorite" class="btn btn-success mt-3">Добавить в избранное</span>
     </form>
 
 
