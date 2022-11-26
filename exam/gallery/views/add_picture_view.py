@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.views.generic import CreateView
 
@@ -5,7 +6,7 @@ from gallery.forms import AddEditPictureForm
 from gallery.models import Picture
 
 
-class PictureAddView(CreateView):
+class PictureAddView(LoginRequiredMixin, CreateView):
     template_name = 'add_picture.html'
     model = Picture
     form_class = AddEditPictureForm

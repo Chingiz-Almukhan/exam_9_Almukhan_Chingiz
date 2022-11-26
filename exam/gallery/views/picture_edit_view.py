@@ -4,9 +4,10 @@ from django.views.generic import UpdateView
 
 from gallery.forms import AddEditPictureForm
 from gallery.models import Picture
+from gallery.views.base import CustomPassesTestMixin
 
 
-class PictureUpdateView(UpdateView):
+class PictureUpdateView(CustomPassesTestMixin, UpdateView):
     model = Picture
     form_class = AddEditPictureForm
     template_name = 'edit_picture.html'

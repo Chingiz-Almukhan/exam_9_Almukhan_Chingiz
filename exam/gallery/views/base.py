@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views.generic import ListView
 
 from gallery.models import Picture
@@ -8,11 +9,9 @@ class PostView(ListView):
     model = Picture
     context_object_name = 'pictures'
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(object_list=object_list, **kwargs)
-        # user = self.request.user
-        # posts = Post.objects.filter(author__in=subscribers).order_by('-created_at')
-        # context['posts'] = posts
-        # context['form'] = SearchForm()
-        # context['comment_form'] = AddCommentForm()
-        return context
+
+class CustomPassesTestMixin(UserPassesTestMixin):
+
+    def test_func(self):
+        self.object = self.get_object()
+        return self.request.user == self.object.author or self.request.user.is_superuser
