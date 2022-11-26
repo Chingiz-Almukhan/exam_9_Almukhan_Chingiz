@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+
+
+{% block container %}
+<section class="min-vh-100" >
+    <div class="container py-5">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-lg-9 col-xl-7">
+                <div class="card rounded-3">
+                    <div class="card-body p-4">
+                        <form action="{% url 'login' %}" method="POST">
+                            <div class="form">
+                                {% csrf_token %}
+                                {% bootstrap_form form %}
+                                <button type="submit" class="btn btn-outline-info btn-block mt-5"><i
+                                        class="lead">Войти</i></button>
+                            </div>
+                        </form>
+                        <div class="mx-auto mt-1" style="width: 300px;">
+                            <p>Не зарегистрированы? <a href="{% url 'register' %}">Создать профиль</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
