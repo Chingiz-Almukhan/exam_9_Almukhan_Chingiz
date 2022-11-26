@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>{{ picture.title }} </title>
+{% endblock %}
+
+{% block container %}
+
+{% load django_bootstrap5 %}
+{% load static %}
+
+<div class="col-sm-12 col-md-8 offset-md-2 mb-5 mt-5 p-0 post-container">
+    <a href="" style='color: inherit;text-decoration: inherit;'>
+        <div class="media pt-3 pl-3 pb-1">
+            <div class="media-body">
+                <p style="margin-top: 5px;"> Публикация от: {{ picture.author.username }}</p>
+            </div>
+        </div>
+    </a>
+
+    <a href="{% url 'picture_detail' picture.pk %}">
+        <img style="width: 100%;" src="{{ picture.image.url }}" alt="">
+    </a>
+    <form action="{% url 'delete_picture' picture.pk %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger mt-3">Удалить</button>
+        <a href="{% url 'edit_picture' picture.pk %}" class="btn btn-warning mt-3">Редактировать</a>
+        <span  class="btn btn-success mt-3">Добавить в избранное</span>
+    </form>
+
+
+    <p class=" ml-1 mr-1 mb-2">
+        <b> {{ picture.author.username }}</b> <small class="text-break">{{ picture.description }} </small>
+    </p>
+
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% load django_bootstrap5 %}
+{% load static %}
+<div class="card">
+  <div class="card-header" style="background-color: white">
+    <a href="" style='color: inherit;text-decoration: inherit;'>
+        <div class="media pt-3 pl-3 pb-1">
+            <div class="media-body">
+                <p style="margin-top: 5px;">Публикация от: <b>{{ picture.author.username }}</b></p>
+            </div>
+        </div>
+    </a>
+  </div>
+  <div class="card-body">
+    <a href="{% url 'picture_detail' picture.pk %}">
+        <img style="width: 100%;" src="{{ picture.image.url }}" alt="">
+    </a>
+    <p class=" ml-1 mr-1 mb-2">
+        <b> {{ picture.author.username }}</b> <small class="text-break">{{ picture.description }} </small>
+    </p>
+
+  </div>
+</div>
+
