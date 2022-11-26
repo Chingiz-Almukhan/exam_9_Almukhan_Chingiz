@@ -59,7 +59,7 @@ class UserDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.get_object()
-        context['pictures'] = Picture.objects.filter(author=user)
+        context['pictures'] = Picture.objects.all()
         # context['vacancy'] = Vacancy.objects.filter(author=user).order_by('-updated_at')
         # context['change_form'] = UserChangeForm(instance=self.object)
         return context

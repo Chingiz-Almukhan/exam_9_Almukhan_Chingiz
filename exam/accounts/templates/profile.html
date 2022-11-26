@@ -33,13 +33,18 @@
         Избранные публикации
     </h2>
     <div class="row mt-3">
-        {% for picture in pictures %}
+        {% for picture in user_obj.favorite_pictures.all %}
+
         <div class="col-sm-4 pt-5 pb-5 pr-5 pl-5 d-flex justify-content-center align-items-center">
             <a href="{% url 'picture_detail' picture.id %}" class="border">
                 <img src="{{ picture.image.url }}" alt="" height="272" width="272"
                      class="img-fluid"/>
             </a>
+            <span>
+
+            </span>
         </div>
+
         {% endfor %}
     </div>
 </div>
